@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Material Design Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css">
+    <!-- Google Fonts - Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset and Font Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+        }
+
+        /* Fixed Sidebar Container */
+        #sidebar {
+            position: fixed;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background-color: #1992d4; 
+            box-shadow: rgba(0, 0, 0, 1);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        }
+
+        /* Dashboard Logo Section */
+        .Logo {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 30px;
+            gap: 5px;
+        }
+
+        .Logo-text {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* Main Navigation Container */
+        .sidebar-nav {
+            display: grid;
+        }
+
+        /* Primary Navigation List */
+        .nav-list {
+            list-style: none;
+            padding: 10px;
+            display: grid;
+            gap: 15px;
+        }
+
+        /* Secondary Navigation List */
+        .nav-list-2 {
+            margin-top: 75px;
+            list-style: none;
+            display: grid;
+            gap: 15px;
+            padding: 10px;
+        }
+
+        /* Individual Navigation Items */
+        .nav-item {
+            display: grid;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Navigation Link Styling */
+        .nav-link {
+            display: grid;
+            grid-template-columns: auto 1fr; 
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            gap: 10px;
+            padding-left: 20px;
+        }
+
+        .nav-link:hover {
+            background-color: #167eb5;
+        }
+
+        .nav-text {
+            margin-left: 5px;
+        }
+
+        /* Top Header Section */
+        #top-section {
+            margin-left: 300px;
+            height: 200px;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        /* Top Row Grid Layout */
+        .top-grid {
+            display: grid;
+            grid-template-columns: 3fr 0.5fr 0fr 0.75fr;
+            grid-template-areas: "area1 area2 area3 area4";
+        }
+
+        /* Bottom Row Grid Layout */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 4fr 1.5fr 0.5fr 1fr;
+            grid-template-areas: "area5 area6 area7 area8";
+        }
+
+        /* Base Grid Area Styling */
+        .grid-area {
+            background-color: white;
+        }
+
+        /* Search Bar Area */
+        .grid-area[style*="area1"] {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .search-image {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .search-image:hover {
+            color: gray;
+            transform: scale(1.1)
+        }
+
+        #search {
+            flex: 1;
+            padding: 5px;
+            background-color: rgba(145, 138, 163, 0.2);
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #search:focus{
+           background-color: white;
+           border: 1px solid black;
+        }
+
+        /* Notification Area */
+        .grid-area[style*="area2"] {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .notification-image {
+            font-size: 24px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        .notification-image:hover {
+            color: gray;
+            transform: scale(1.1);
+        }
+
+        /* Small Profile Picture Area */
+        .grid-area[style*="area3"] {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid black;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1);
+        }
+
+        /* Username Area */
+        .grid-area[style*="area4"] {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .username {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .username:hover{
+            transform: scale(1.1);
+            color: #167eb5;
+        }
+
+        /* Large Profile Section */
+        .grid-area[style*="area5"] {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .large-profile-pic {
+            margin-left: 30px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .large-profile-pic:hover {
+            transform: scale(1.1)
+        }
+
+        .profile-text {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .top-text{
+            margin-bottom: 0px;
+            font-weight: bold;
+        }
+
+        .bottom-text {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        /* Action Button Areas */
+        .grid-area[style*="area6"] {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .grid-area[style*="area7"] {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .grid-area[style*="area8"] {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            gap: 10px;
+        }
+
+        /* Blue Action Buttons */
+        .blue-buttons {
+            background-color: #1992d4;
+            color: white;
+            width: 100px;
+            height: 40px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .blue-buttons:hover{
+            background-color: #167eb5;
+        }
+
+        /* Main Content Section */
+        #bottom-section {
+            margin-left: 325px;
+            margin-top: 20px;
+            margin-right: 10px;
+            display: grid;
+            grid-template-columns: 2fr 0.7fr;
+            gap: 20px;
+            height: calc(100vh - 240px)
+        }
+
+        /* Right Sidebar Grid */
+        .sidebar-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1.2fr;
+            height: 100%;
+            gap: 20px;
+            grid-template-areas: 
+                "announcements"
+                "trending";
+        }
+
+        /* Announcements Section */
+        .announcements-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .announcements-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .announcements-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: none;
+            height: 85%;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+
+        }
+
+        .announcements-grid {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            height: 100%;
+            flex: 1;
+            gap: 2px;
+            padding: 15px;
+        }
+
+        .announcement-text-title {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+        .announcement-subtext {
+            color: gray;
+            text-align: left;
+            font-size: 10px;
+            width: 200px;
+            margin-top: 3px;
+        }
+
+        /* Announcement Item Borders */
+        .announcements-grid .announcement-item:nth-child(1) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .announcements-grid .announcement-item:nth-child(3) {
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        /* Trending Section */
+        .trending-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .trending-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .trending-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: none;
+            height: 85%;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trending-grid {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            height: 100%;
+            flex: 1;
+            gap: 2px;
+            padding: 15px;
+        }
+
+        .trending-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas: 
+                "image username"
+                "image description";
+            align-items: center;
+            padding: 10px;
+        }
+
+        .trending-image {
+            grid-area: image;
+        }
+
+        .trending-image img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid black;
+            object-fit: cover;
+        }
+
+        .trending-image img:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            border-radius: 50%;
+            border: 2px solid #167eb5;
+            
+        }
+
+        .trending-at {
+            grid-area: username;
+            font-size: 14px;
+            margin-left: 10px;
+            transform-origin: left center;
+        }
+
+        .trending-at:hover {
+            cursor: pointer;
+            color: #167eb5;
+        }
+
+
+        .trending-text {
+            grid-area: description;
+            font-size: 12px;
+            color: gray;
+            margin-left: 10px;
+            margin-top: -20px;
+        }
+
+        /* Projects Grid Layout */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas: 
+                "project1 project2"
+                "project3 project4"
+                "project5 project6";
+            gap: 20px;
+        }
+
+        /* Individual Project Card */
+        .project-card {
+            background-color: white;
+            border-left: 8px solid #f0b429;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-left: 5px;
+        }
+
+        .subtext {
+            font-size: 12px;
+            margin-left: 5px;
+            max-width: 350px;
+            color: gray;
+        }
+
+        /* Project Card Action Icons */
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: auto;
+            padding-right: 15px;
+            padding-bottom: 15px;
+        }
+
+        .card-actions i {
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .card-actions i:hover {
+            color: #1992d4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Sidebar Navigation -->
+    <div id="sidebar">
+        <!-- Dashboard Logo -->
+        <div class="Logo">
+            <div class="Logo-image">
+                <svg width="75" height="75" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#1992d4" rx="0" ry="0"/>
+                    <!-- Dashboard icon grid pattern -->
+                    <rect x="16" y="20" width="40" height="36" fill="white" rx="0" ry="0"/>
+                    <rect x="64" y="20" width="18" height="18" fill="white" rx="0" ry="0"/>
+                    <rect x="64" y="46" width="18" height="36" fill="white" rx="0" ry="0"/>
+                    <rect x="16" y="64" width="40" height="18" fill="white" rx="0" ry="0"/>
+                </svg>
+            </div>
+            <div class="Logo-text">Dashboard</div>
+        </div>
+        
+        <!-- Main Navigation Menu -->
+        <nav class="sidebar-nav">
+            <!-- Primary Navigation Links -->
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-home"></i></span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-account"></i></span>
+                        <span class="nav-text">Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-message-text"></i></span>
+                        <span class="nav-text">Messages</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-history"></i></span>
+                        <span class="nav-text">History</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-clipboard-check"></i></span>
+                        <span class="nav-text">Tasks</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-account-group"></i></span>
+                        <span class="nav-text">Communities</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Secondary Navigation Links -->
+            <ul class="nav-list-2">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-cog"></i></span>
+                        <span class="nav-text">Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-help-circle"></i></span>
+                        <span class="nav-text">Support</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-image"><i class="mdi mdi-shield-account"></i></span>
+                        <span class="nav-text">Privacy</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- Top Header Section -->
+    <div id="top-section">
+        <!-- Search and Notifications Row -->
+        <div class="top-grid">
+            <div class="grid-area" style="grid-area: area1;">
+                <span class="search-image"><i class="mdi mdi-magnify"></i></span>
+                <input type="text" id="search" name="search">
+            </div>
+            <div class="grid-area" style="grid-area: area2;">
+                <span class="notification-image"><i class="mdi mdi-bell-ring-outline"></i></span>
+            </div>
+            <div class="grid-area" style="grid-area: area3;">
+                <img src="pfp.png" alt="User's Profile Picture" class="profile-pic">
+            </div>
+            <div class="grid-area" style="grid-area: area4;">
+                <div class="username">Morgan Oakley</div>
+            </div>
+        </div>
+
+        <!-- User Profile and Action Buttons Row -->
+        <div class="bottom-grid">
+            <div class="grid-area" style="grid-area: area5;">
+                <img src="pfp.png" alt="User's Profile Picture" class="large-profile-pic">
+                <div class="profile-text">
+                    <div class="top-text">Hi there,</div>
+                    <div class="bottom-text">Morgan Oakley (@morgan)</div>
+                </div>
+            </div>
+            <div class="grid-area" style="grid-area: area6;">
+                <button class="blue-buttons" type="button">New</button>
+            </div>
+            <div class="grid-area" style="grid-area: area7;">
+                <button class="blue-buttons" type="button">Upload</button>
+            </div>
+            <div class="grid-area" style="grid-area: area8;">
+                <button class="blue-buttons" type="button">Share</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div id="bottom-section">
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <div class="project-card" style="grid-area: project1;">
+                <div class="title">Super Cool Project</div>
+                <div class="subtext">Sed tempus ut lacus ut scelerisque. Suspendisse sollicitudin nibh erat, id facilisis felis accumsan nec.</div>
+                <div class="card-actions">
+                    <i class="mdi mdi-star-plus-outline"></i>
+                    <i class="mdi mdi-eye-plus-outline"></i>
+                    <i class="mdi mdi-source-fork"></i>
+                </div>
+            </div>
+            <div class="project-card" style="grid-area: project2;">
+                <div class="title">Less Cool Project</div>
+                <div class="subtext">Nullam condimentum ipsum ut lectus vehicula consectetur. Quisque sed dolor tincidunt, consectetur sapien et, facilis dolor. Duis sem purus, dignissim ut sapien in, varius pellentesque lacus.</div>
+                <div class="card-actions">
+                    <i class="mdi mdi-star-plus-outline"></i>
+                    <i class="mdi mdi-eye-plus-outline"></i>
+                    <i class="mdi mdi-source-fork"></i>
+                </div>
+            </div>
+            <div class="project-card" style="grid-area: project3;">
+                <div class="title">Impossible App</div>
+                <div class="subtext">In hac habitasse platea dictumst. Vivamus dictum rutrum arcu, a placerat velit sagittis id.</div>
+                <div class="card-actions">
+                    <i class="mdi mdi-star-plus-outline"></i>
+                    <i class="mdi mdi-eye-plus-outline"></i>
+                    <i class="mdi mdi-source-fork"></i>
+                </div>
+            </div>
+            <div class="project-card" style="grid-area: project4;">
+                <div class="title">Easy Peasy App</div>
+                <div class="subtext">Etiam cursus eros ac effictur fringilla. Vestibulum dignissim urna eget accumsan aliquam. Curabitur dignissim nisi in tortor commodo, ac bibendum magna tincidunt</div>
+                <div class="card-actions">
+                    <i class="mdi mdi-star-plus-outline"></i>
+                    <i class="mdi mdi-eye-plus-outline"></i>
+                    <i class="mdi mdi-source-fork"></i>
+                </div>
+            </div>
+            <div class="project-card" style="grid-area: project5;">
+                <div class="title">Ad Blocker</div>
+                <div class="subtext">Quisque eget rutrum nisl. Nam augue justo, cursus vitae metus vel, pharetra hendrerit feils. Aliquam sed malesuada eros.</div>
+                <div class="card-actions">
+                    <i class="mdi mdi-star-plus-outline"></i>
+                    <i class="mdi mdi-eye-plus-outline"></i>
+                    <i class="mdi mdi-source-fork"></i>
+                </div>
+            </div>
+            <div class="project-card" style="grid-area: project6;">
+                <div class="title">Money Maker</div>
+                <div class="subtext">Praesent convallis, libero quis congue elementum, nunv ante faucibus sapien, ac scelerisque tortor purus sit amet ex. Pellentesque mollis nec sem vel aliquam.</div>
+                <div class="card-actions">
+                    <i class="mdi mdi-star-plus-outline"></i>
+                    <i class="mdi mdi-eye-plus-outline"></i>
+                    <i class="mdi mdi-source-fork"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar: Announcements and Trending -->
+        <div class="sidebar-grid">
+            <!-- Announcements Section -->
+            <div class="announcements-section" style="grid-area: announcements;">
+                <div class="announcements-title">Announcements</div>
+                <div class="announcements-card">
+                    <div class="announcements-grid">
+                        <div class="announcement-item">
+                            <div class="announcement-text-title">Site Maintenance</div>
+                            <div class="announcement-subtext">Vestibulum condimentum tellus lacus, in accumsan elit maximus ac. Donec hendrerit sodales congue...</div>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="announcement-text-title">Community Share Day</div>
+                            <div class="announcement-subtext">Nam vel lectus ticidunt, rutrum nulla eu, ornare libero. Aliquam dictum accumsam porttitor...</div>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="announcement-text-title">Updated Privacy Policy</div>
+                            <div class="announcement-subtext">Phasellus efficitur nisi eget elit consectetur, eget condimentum ante auctor. Cras fringilla sagittis sem in mattis...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Trending Section -->
+            <div class="trending-section" style="grid-area: trending;">
+                <div class="trending-title">Trending</div>
+                <div class="trending-card">
+                    <div class="trending-grid">
+                        <div class="trending-item">
+                            <div class="trending-image">
+                                <img src="pfp1.png" alt="trending-pfp-1">
+                            </div>
+                            <div class="trending-at">@tegan</div>
+                            <div class="trending-text">World Peace Builder</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-image">
+                                <img src="pfp.png" alt="trending-pfp-1">
+                            </div>
+                            <div class="trending-at">@morgan</div>
+                            <div class="trending-text">Super Cool Project</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-image">
+                                <img src="pfp3.png" alt="trending-pfp-1">
+                            </div>
+                            <div class="trending-at">@kendall</div>
+                            <div class="trending-text">Life Changing App</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-image">
+                                <img src="pfp4.png" alt="trending-pfp-1">
+                            </div>
+                            <div class="trending-at">@alex</div>
+                            <div class="trending-text">No Traffic Maker</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
